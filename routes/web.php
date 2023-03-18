@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\admin\RoleController;
+use App\Http\Controllers\admin\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,11 +26,18 @@ Route::get('/', function () {
 
 Route::view('sample-page', 'admin.pages.sample-page')->name('sample-page');
 
-Route::prefix('dashboard')->group(function () {
-    
-    Route::get('/',  [App\Http\Controllers\admin\UserController::class, 'allUser'])->name('allUser');
-    Route::get('/createUser/{id?}',  [App\Http\Controllers\admin\UserController::class, 'create'])->name('createUser');
+Route::prefix('dashboard')->middleware('auth')->group(function(){
+ 
+        Route::resource('roles', RoleController::class);
+        Route::resource('users', UserController::class);
+        Route::resource('products', ProductController::class);
+        Route::get('/changeStatus/{id}/{status}',  [UserController::class, 'changeStatus']);
+        Route::get('/activeLog',  [UserController::class, 'activeLog']);
+
+    Route::get('/',  [App\Http\Controllers\admin\UserController::class, 'index'])->name('allUser');
+    Route::get('/editUser/{id}',  [App\Http\Controllers\admin\UserController::class, 'edit'])->name('editUser');
     Route::post('/saveUser',  [App\Http\Controllers\admin\UserController::class, 'saveUser'])->name('saveUser');
+    Route::post('/updateUser/{id}',  [App\Http\Controllers\admin\UserController::class, 'update'])->name('updateUser');
     Route::view('default', 'admin.dashboard.default')->name('dashboard.index');
 });
 

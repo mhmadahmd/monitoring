@@ -35,8 +35,8 @@
                     <li class="dropdown">
                         <a class="nav-link menu-title {{ prefixActive('/dashboard') }}" href="javascript:void(0)"><i data-feather="home"></i><span>Dashboard</span></a>                  
                         <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/dashboard') }};">
-                            <li><a href="{{route('index')}}" class="{{routeActive('index')}}">Default</a></li>
-                            <li><a href="{{route('dashboard-02')}}" class="{{routeActive('dashboard-02')}}">Ecommerce</a></li>
+                            <li><a href="{{route('users.index')}}" class="{{routeActive('users.index')}}">Manage user</a></li>
+                            <li><a href="{{ route('roles.index') }}" class="{{routeActive('roles.index')}}">Manage Role</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

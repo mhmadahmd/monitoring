@@ -26,21 +26,22 @@
 						<h5>Create/Edit user</h5>
 					</div>
                     @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+					<div class="alert alert-danger">
+						<ul>
+							@foreach ($errors->all() as $error)
+								<li>{{ $error }}</li>
+							@endforeach
+						</ul>
+					</div>
+				@endif
 					<div class="card-body">
-						<form class="needs-validation" action="{{ route('saveUser') }}" method="POST" novalidate="">
+						<form class="needs-validation" action="{{ isset($user) ? route('updateUser',$user->id) :route('saveUser') }}" method="POST" novalidate="">
                             @csrf
 							<div class="row g-3">
 								<div class="col-md-4">
 									<label class="form-label" for="fullName">Full name</label>
-									<input class="form-control" id="fullName" type="text" name="name" required="" />
+									<input class="form-control" value="{{ isset($user->name) ? $user->name :'' }}" 
+									 id="fullName" type="text" name="name" required="" />
                                     <div class="invalid-feedback">Please provide a valid Full name.</div>
 								</div>
 
@@ -48,13 +49,17 @@
 									<label class="form-label" for="Email">Email</label>
 									<div class="input-group">
 										<span class="input-group-text" id="inputGroupPrepend">@</span>
-										<input class="form-control" id="Email" type="text" name="email" placeholder="email" aria-describedby="inputGroupPrepend" required="" />
+										<input class="form-control" id="Email" type="text"
+										value="{{ isset($user->email) ? $user->email :'' }}" 
+										 name="email" placeholder="email" aria-describedby="inputGroupPrepend" required="" />
 										<div class="invalid-feedback">Please provide a valid Email.</div>
 									</div>
 								</div>
                                 <div class="col-md-4 date-picker">
 									<label class="form-label" for="birthday">birthday</label>
-                                      <input class="datepicker-here form-control digits" id="birthday"
+                                      <input class="datepicker-here form-control digits"
+									  value="{{ isset($user->birthday) ? $user->birthday :'' }}"  id="birthday"
+									  name="birthday"
                                        type="text" data-language="en" />
 									<div class="valid-feedback">Please select a birthday.</div>
 								</div>
@@ -67,11 +72,11 @@
                                       <div class="col">
                                         <div class="form-group m-t-15 m-checkbox-inline mb-0 custom-radio-ml">
                                           <div class="radio radio-primary">
-                                            <input id="male" type="radio" name="gender" value="1">
+                                            <input id="male" type="radio"  name="gender" value="1" {{isset($user->gender)? $user->gender == 1 ? 'checked' :'':'' }}>
                                             <label class="mb-0" for="male">male</label>
                                           </div>
                                           <div class="radio radio-primary">
-                                            <input id="female" type="radio" name="gender" value="0">
+                                            <input id="female" type="radio" name="gender" value="0" {{ isset($user->gender)? $user->gender == 0 ? 'checked' :'':'' }}>
                                             <label class="mb-0" for="female">female</label>
                                           </div>
                                         </div>
@@ -80,21 +85,37 @@
 								</div>
 								<div class="col-md-3">
 									<label class="form-label" for="role">role</label>
+							
 									<select class="form-select" name="role" id="role" required="">
 										<option selected="" disabled="" value="">Choose...</option>
-										<option>...</option>
+										@if(isset($userRole) && $userRole!=null)
+										@foreach ($userRole as $userRole)
+										@foreach ($roles as $roles)
+										<option value="{{ $roles }}"@if($roles == $userRole)selected="selected"@endif>{{ $roles }}</option>
+										@endforeach
+										@endforeach
+										@else
+								
+										@foreach ($roles as $roles)
+										<option value="{{ $roles }}">{{ $roles }}</option>
+										@endforeach
+									
+										@endif
+										
 									</select>
 									<div class="invalid-feedback">Please select a valid role.</div>
 								</div>
 								<div class="col-md-3 mb-3">
                                     <label class="form-label" for="address">address</label>
-									<input class="form-control" id="address" type="text" name="address" placeholder="City" required="" />
+									<input class="form-control" id="address"
+									value="{{ isset($user->address) ? $user->address :'' }}"  type="text" name="address" placeholder="City" required="" />
 									<div class="invalid-feedback">Please provide a valid city.</div>
 								</div>
 
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label" for="phone_number">phone_number</label>
-                                    <input class="form-control m-input digits" name="phone_number" id="phone_number"
+                                    <input class="form-control m-input digits"
+									value="{{ isset($user->phone_number) ? $user->phone_number :'' }}"  name="phone_number" id="phone_number"
                                      type="tel" placeholder="91-(999)-999-999">					
                             	<div class="invalid-feedback">Please provide a valid phone_number.</div>
 								</div>
