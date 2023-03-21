@@ -32,7 +32,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function(){
         Route::resource('users', UserController::class);
         Route::resource('products', ProductController::class);
         Route::get('/changeStatus/{id}/{status}',  [UserController::class, 'changeStatus']);
-        Route::get('/activeLog',  [UserController::class, 'activeLog']);
+        Route::get('/activeLog',  [UserController::class, 'activeLog'])->name('activeLog');
 
     Route::get('/',  [App\Http\Controllers\admin\UserController::class, 'index'])->name('allUser');
     Route::get('/editUser/{id}',  [App\Http\Controllers\admin\UserController::class, 'edit'])->name('editUser');

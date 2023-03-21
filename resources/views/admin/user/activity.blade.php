@@ -43,17 +43,33 @@
 	                                    <th>log_name</th>
 	                                    <th>description </th>
 	                                    <th>subject_type</th>
+	                                    <th>causer</th>
+	                                    {{-- <th>causer</th> --}}
 	                                    <th>event</th>
+	                                    <th>Created</th>
 									
 	                                </tr>
 	                            </thead>
 	                            <tbody>
-									@foreach ($activity as $activity)
+				
+									@foreach ($activities as $activity)
 									<tr>
+								
 	                                    <td>{{  $activity->log_name }}</td>
 	                                    <td>{{  $activity->description  }}</td>
 	                                    <td>{{  $activity->subject_type }}</td>
+	                                    <td>{{  $activity->causer->name }}</td>
+										{{-- 									
+										<td>
+										@foreach ($activity->properties['attributes'] as $key => $value)
+										<div>New {{ $key }}: {{ $value }}</div>
+										<div>New {{ $key }}: {{ isset( $activity->properties['attributes'])? $activity->properties['attributes'] [$key] : ''}}</div>
+										<div>Original {{ $key }}: {{ isset( $activity->properties['old'])? $activity->properties['old'] [$key] : ''}}
+									@endforeach
+									<td> --}}
+	                                    {{-- <td>{{  $activity->properties }}</td> --}}
 	                                    <td>{{  $activity->event }}</td>
+	                                    <td>{{  $activity->created_at }}</td>
 							
 	                                </tr>
 									@endforeach

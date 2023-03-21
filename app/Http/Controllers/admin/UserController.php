@@ -70,9 +70,28 @@ class UserController extends Controller
 
     public function activeLog()
     {
-        $activity = Activity::all();
-         return view('admin.user.activity',compact('activity'));
-    
+        $activities = Activity::all();
+        // $arr = [];
+        // foreach($activities as $activity) {
+        // dd( $activity->properties);
+          
+        //     $properties = $activity->properties->toArray();
+        //     // if(isset($properties['attributes'])){
+        //     $subArr['attributes'] = $properties['attributes'];
+        //     $subAtrr= $properties['attributes'];
+        //     // }
+        //     // else{ $subAtrr[]= '';}
+        //     if(isset($properties['old'])){
+        //       $subArr['old'] = $properties['old'];
+        //       $subOld = $properties['old'];
+        //     }else{  $subOld[] = '';}
+        //   $fullDiff = array_merge(array_diff($subAtrr, $subOld), array_diff($subOld, $subAtrr));
+        //   array_push($arr, $fullDiff);
+
+        //   }
+        //   dd(   $arr);
+        
+         return view('admin.user.activity',compact('activities'));
     }
 
 

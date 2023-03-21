@@ -15,11 +15,13 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles,LogsActivity;
 
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
+
     protected $fillable = [
         'name',
         'email',
@@ -46,9 +48,13 @@ class User extends Authenticatable
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-        ->logOnly(['name', 'email']);
+        ->logOnly([ 'name','email','password','birthday','gender','img','phone_number','address','role','account_status',])
+        ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName}")
+        ->useLogName('user');;
+        ;
         
     }
+ 
 
     /**
      * The attributes that should be cast.
