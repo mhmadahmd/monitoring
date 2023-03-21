@@ -67,7 +67,8 @@
 										<div>Original {{ $key }}: {{ isset( $activity->properties['old'])? $activity->properties['old'] [$key] : ''}}
 									@endforeach
 									<td> --}}
-	                                    {{-- <td>{{  $activity->properties }}</td> --}}
+	                                    <td>
+											<pre>{{ $activity->properties  }}</pre></td>
 	                                    <td>{{  $activity->event }}</td>
 	                                    <td>{{  $activity->created_at }}</td>
 							

@@ -49,8 +49,8 @@ class UserController extends Controller
       $userData = $request->all();
       $userData['password'] = Hash::make($userData['password']);
 
-      if ($request->hasfile('img')) {
-        $Imag = $request->file('img');
+      if ($request->hasfile('image')) {
+        $Imag = $request->file('image');
         $ext = $Imag->GetClientOriginalExtension();
         $filename = 'profile' . '_' . time() . '.' . $ext;
         $location = public_path("/img/" . $filename);
@@ -116,15 +116,15 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if ($request->hasfile('img')) {
-            $Imag = $request->file('img');
+        if ($request->hasfile('image')) {
+            $Imag = $request->file('image');
             $ext = $Imag->GetClientOriginalExtension();
             $filename = 'profile' . '_' . time() . '.' . $ext;
             $location = public_path("/img/" . $filename);
             Image::make($Imag->getRealPath())->resize(500, 500)->save($location);
             $request->merge(['img' => $filename]);
         }
- 
+        
     $input = $request->all();
     if(!empty($input['password'])){ 
         $input['password'] = Hash::make($input['password']);

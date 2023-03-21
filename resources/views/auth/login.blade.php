@@ -15,7 +15,7 @@
                 <div class="login-card">
                     <form class="theme-form login-form" method="POST" action="{{ route('login') }}">
                             @csrf
-                        <h4>Login</h4>
+                        <h4>{{ __('Login') }}</h4>
                         <h6>Welcome back! Log in to your account.</h6>
                         <div class="form-group">
                             <label>Email Address</label>

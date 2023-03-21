@@ -310,3 +310,29 @@ $(".mode").on("click", function () {
         var color = $(this).attr("data-attr");
         localStorage.setItem('body', 'dark-only');
     });
+
+
+    ////
+    $(".textValid").keypress(function (event) {
+        var character = String.fromCharCode(event.keyCode);
+        return isValid(character);
+    });
+    
+    function isValid(str) {
+        return !/[~`!@#$%\^&*()+=\-\[\]\\';,/{}|\\":<>\?]/g.test(str);
+    }
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(150)
+                    .height(200);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }

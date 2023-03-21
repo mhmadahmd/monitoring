@@ -35,12 +35,14 @@
 					</div>
 				@endif
 					<div class="card-body">
-						<form class="needs-validation" action="{{ isset($user) ? route('updateUser',$user->id) :route('saveUser') }}" method="POST" novalidate="">
+						<form class="needs-validation" action="{{ isset($user) ? route('updateUser',$user->id) :route('saveUser') }}" 
+							enctype="multipart/form-data" method="POST" novalidate="">
                             @csrf
 							<div class="row g-3">
 								<div class="col-md-4">
 									<label class="form-label" for="fullName">Full name</label>
-									<input class="form-control" value="{{ isset($user->name) ? $user->name :'' }}" 
+									<input class="form-control textValid" value="{{ isset($user->name) ? $user->name :'' }}" 
+									{{-- onkeypress="return /[0-9a-zA-Z]/i.test(event.key)" --}}
 									 id="fullName" type="text" name="name" required="" />
                                     <div class="invalid-feedback">Please provide a valid Full name.</div>
 								</div>
@@ -107,7 +109,7 @@
 								</div>
 								<div class="col-md-3 mb-3">
                                     <label class="form-label" for="address">address</label>
-									<input class="form-control" id="address"
+									<input class="form-control textValid" id="address" 
 									value="{{ isset($user->address) ? $user->address :'' }}"  type="text" name="address" placeholder="City" required="" />
 									<div class="invalid-feedback">Please provide a valid city.</div>
 								</div>
@@ -125,8 +127,12 @@
                             <div class="row g-3">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" >Upload Image</label>
-                                    <input class="form-control" name="img" type="file" >								
-                            
+                                    <input class="form-control custom-upload__input" name="image" type="file" id="file" 
+										value="{{ isset($user->img) ? $user->img :'' }}" 
+                                            accept="image/*" onchange="readURL(this);">
+
+                                    <img id="blah" style="width: 35%;"
+									 src="  {{ asset('img') }}/{{ isset($user->img) ? $user->img : '' }}" style="">
 								</div>
 
                                 <div class="col-md-6 mb-3">
@@ -161,6 +167,7 @@
 	<script src="{{ asset('assets/js/datepicker/date-picker/datepicker.js') }}"></script>
     <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.en.js') }}"></script>
     <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.custom.js') }}"></script>
+
 	@endpush
 
 @endsection

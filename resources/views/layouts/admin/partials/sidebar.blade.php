@@ -38,6 +38,7 @@
                             <li><a href="{{route('users.index')}}" class="{{routeActive('users.index')}}">Manage user</a></li>
                             <li><a href="{{ route('roles.index') }}" class="{{routeActive('roles.index')}}">Manage Role</a></li>
                             <li><a href="{{ route('activeLog') }}" class="{{routeActive('activeLog')}}">Activity log</a></li>
+                            <li><a href="{{ url('translations') }}" class="{{url('translations')}}">translations</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
