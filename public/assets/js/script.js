@@ -336,3 +336,9 @@ $(".mode").on("click", function () {
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    $(document).ready(function () {
+    var layout = $('#langDir').attr("data-attr");
+    $("body").attr("class", layout);
+    $("html").attr("dir", layout);
+})

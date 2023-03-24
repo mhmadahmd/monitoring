@@ -49,7 +49,7 @@ class User extends Authenticatable
     {
         return LogOptions::defaults()
         ->logOnly([ 'name','email','password','birthday','gender','img','phone_number','address','role','account_status',])
-        ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName}")
+        // ->setDescriptionForEvent(fn(string $eventName) => "This model has been {$eventName}")
         ->useLogName('user');;
         ;
         

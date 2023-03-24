@@ -29,8 +29,12 @@ class UserController extends Controller
     {
       
         $Status = User::where('id', $id)->update(['account_status'=>$status]);
-
-        return $Status;
+        return [
+            'status' => 0,
+            'message' => __('Successfully updated activite user'),
+            'reload' => true
+        ];
+    
     }
     public function saveUser(Request $request)
     {
@@ -63,7 +67,11 @@ class UserController extends Controller
         $user->assignRole($request->input('role'));
 
 
-    
+        return [
+            'status' => 0,
+            'message' => __('Successfully updated activite user'),
+            'reload' => true
+        ];
 
         return redirect()->route('users.index');
     }
@@ -71,27 +79,24 @@ class UserController extends Controller
     public function activeLog()
     {
         $activities = Activity::all();
-        // $arr = [];
-        // foreach($activities as $activity) {
-        // dd( $activity->properties);
+        $arr = [];
+        foreach($activities as $activity) {
+      
+          if ($activity->description == 'updated') {
           
-        //     $properties = $activity->properties->toArray();
-        //     // if(isset($properties['attributes'])){
-        //     $subArr['attributes'] = $properties['attributes'];
-        //     $subAtrr= $properties['attributes'];
-        //     // }
-        //     // else{ $subAtrr[]= '';}
-        //     if(isset($properties['old'])){
-        //       $subArr['old'] = $properties['old'];
-        //       $subOld = $properties['old'];
-        //     }else{  $subOld[] = '';}
-        //   $fullDiff = array_merge(array_diff($subAtrr, $subOld), array_diff($subOld, $subAtrr));
-        //   array_push($arr, $fullDiff);
+            $properties = $activity->properties->toArray();
+            $subArr['attributes'] []= $properties['attributes'];
+            $subAtrr= $properties['attributes'];
+            $subArr['old'] []= $properties['old'];
+            }
+          }
+          foreach ($subArr['attributes'] as $key => $value) {
 
-        //   }
-        //   dd(   $arr);
+            $fullDiff =array_merge(array_diff($subArr['attributes'][ $key], $subArr['old'][ $key]), array_diff($subArr['old'][ $key], $subArr['attributes'][ $key]));
+            array_push($arr, $fullDiff);
+          }
         
-         return view('admin.user.activity',compact('activities'));
+         return view('admin.user.activity',compact('activities','arr'));
     }
 
 

@@ -8,10 +8,18 @@
 <!-- Bootstrap js-->
 <script src="{{asset('assets/js/bootstrap/popper.min.js')}}"></script>
 <script src="{{asset('assets/js/bootstrap/bootstrap.min.js')}}"></script>
-<!-- Plugins JS start-->
-@stack('scripts')
-<!-- Plugins JS Ends-->
 <!-- Theme js-->
 <script src="{{asset('assets/js/script.js')}}"></script>
 <script src="{{asset('assets/js/theme-customizer/customizer.js')}}"></script>
+<!-- Toastr -->
+<script src="{{ asset('assets/js/toastr/toastr.min.js')}}"></script>
+<!-- SweetAlert2 -->
+<script src="{{ asset('assets/js/sweetalert2/sweetalert2.min.js')}}"></script>
+<!-- Plugins JS start-->
+<script src="{{ asset('assets/js/myJS.js')}}"></script>
+
+@stack('scripts')
+<!-- Plugins JS Ends-->
+
+
 <!-- Plugin used-->

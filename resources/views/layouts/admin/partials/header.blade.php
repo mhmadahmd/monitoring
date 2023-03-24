@@ -21,6 +21,39 @@
       <ul class="nav-menus">
         <li><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
         <li class="onhover-dropdown">
+          <div class="bookmark-box"><i data-feather="globe"></i></div>
+          <div class="bookmark-dropdown onhover-show-div">
+            <div class="form-group mb-0">
+              {{-- <div class="input-group">
+                <div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-search"></i></span></div>
+              </div> --}}
+            </div>
+            <ul>
+          @php
+            $dir    = '../resources/lang';
+            $files2 = array_diff(scandir($dir), array('..', '.'));
+            if (($key = array_search( 'json', $files2)) !== false) {
+                    unset($files2[$key]);
+                }
+       
+            @endphp   
+              @foreach (  config('app.available_locales') as $lang => $language)
+            {{-- @if ( str_contains($language, 'json'))
+            @php unset($files2[$lang]);@endphp
+                
+           @else --}}
+              @if ($lang != App::getLocale())
+                      <a class="dropdown-item" href="{{ route('changeLang', $lang) }}"> {{$language}}	</a>
+              @endif
+              {{-- @endif --}}
+          @endforeach
+               </ul>
+
+               <input type="hidden" id="langDir" data-attr="{{ App::getLocale() == 'en' ? 'ltr' : 'rtl'}}" />
+             
+          </div>
+        </li>
+        <li class="onhover-dropdown">
           <div class="bookmark-box"><i data-feather="star"></i></div>
           <div class="bookmark-dropdown onhover-show-div">
             <div class="form-group mb-0">

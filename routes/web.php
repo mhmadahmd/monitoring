@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\RoleController;
 use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\LangController;
 
 
 /*
@@ -26,7 +27,9 @@ Route::get('/', function () {
 
 Route::view('sample-page', 'admin.pages.sample-page')->name('sample-page');
 
-Route::prefix('dashboard')->middleware('auth')->group(function(){
+Route::prefix('dashboard','{locale}')->middleware('auth','setapplang')->group(function(){
+    Route::get('lang/home', [LangController::class, 'index']);
+    Route::get('changeLang/{lang}', [LangController::class, 'change'])->name('changeLang');
  
         Route::resource('roles', RoleController::class);
         Route::resource('users', UserController::class);

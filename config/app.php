@@ -94,6 +94,11 @@ return [
     | the language folders that are provided through your application.
     |
     */
+    'available_locales' => [
+        'en' => 'English',
+        'ar' => 'Arabic',
+    ],
+   
 
     'fallback_locale' => 'en',
 

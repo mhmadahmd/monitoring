@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 
-@section('title')Basic Init
+@section('title'){{ __('All user')}}
  {{ $title }}
 @endsection
 
@@ -34,17 +34,17 @@
   <p>{{ $message }}</p>
 </div>
 @endif
-	
+
 	<div class="container-fluid">
 	    <div class="row">
 	        <!-- Zero Configuration  Starts-->
 	        <div class="col-sm-12">
 	            <div class="card">
 	                <div class="card-header">
-	                    <h5>all user </h5>
+	                    <h5>{{ __('all user')}} </h5>
 	                   	<a href="{{ route('users.create') }}" class="btn btn-pill btn-success-gradien " 
 						style="float: right"
-						type="button">create user</a>
+						type="button">{{ __('create user')}}</a>
 
 					</div>
 	                <div class="card-body">
@@ -52,13 +52,13 @@
 	                        <table class="display" id="basic-1">
 	                            <thead>
 	                                <tr>
-	                                    <th>Name</th>
-	                                    <th>email </th>
-	                                    <th>address</th>
-	                                    <th>birthday</th>
-										<th>Role</th>
-										<th>status</th>
-	                                    <th>more</th>
+	                                    <th>{{ __('Name')}}</th>
+	                                    <th>{{__('email')}} </th>
+	                                    <th>{{ __('address')}}</th>
+	                                    <th>{{ __('birthday')}}</th>
+										<th>{{ __('Role')}}</th>
+										<th>{{ __('status')}}</th>
+	                                    <th>{{ __('more')}}</th>
 	                                </tr>
 	                            </thead>
 	                            <tbody>
@@ -77,7 +77,7 @@
 										  </td>
 										  <td>
 											<div class="media">
-												<label class="col-form-label m-r-10">@if($user->account_status == 'true') Active @else unActive @endif</label>
+												<label class="col-form-label m-r-10">@if($user->account_status == 'true') {{ __('Active')}} @else {{ __('unActive')}} @endif</label>
 												<div class="media-body text-end icon-state">
 												  <label class="switch">
 													<input type="checkbox" id="my_checkbox"@if($user->account_status == 'true') checked="checked" @endif class="changeStatus" data-id="{{  $user->id }}"><span class="switch-state"></span>
@@ -128,7 +128,28 @@
                 type: "get",
                 contentType: 'application/json',
                 success: function(respon) {
-					window.location.reload();
+					
+					const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+        if (respon.status === 0) {
+            Toast.fire({
+                type: 'success',
+                title: respon.message
+            })
+        }
+		if (respon.status === 1) {
+            Toast.fire({
+                type: 'error',
+                title: respon.message
+            })
+        }
+		if (respon.reload) {
+            window.location.reload();
+        }
               
                 },
             });

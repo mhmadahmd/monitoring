@@ -5,7 +5,10 @@
 @endsection
 
 @push('css')
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
 <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
@@ -17,6 +20,25 @@
     a.status-1{
         font-weight: bold;
     }
+    .navbar-static-top {
+    z-index: 1000;
+    display: grid;
+    border-width: 0 0 1px;
+}
+    .navbar-brand {
+    float: left;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 30px;
+    color: #004d44;
+    line-height: 20px;
+}
+.btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+    margin-left: 20px;
+}
 </style>
 <script>
     jQuery(document).ready(function($){
@@ -103,17 +125,20 @@
 
 <div class="container-fluid">
     <div class="row">
-<header class="navbar navbar-static-top navbar-inverse" id="top" role="banner">
+<header class="navbar navbar-static-top " id="top" role="banner">
     <div class="container-fluid">
+      
         <div class="navbar-header">
+           
             <a href="<?php echo action('\Barryvdh\TranslationManager\Controller@getIndex') ?>" class="navbar-brand">
                 Translation Manager
             </a>
+       
         </div>
     </div>
 </header>
 <div class="container-fluid ">
-    <p>Warning, translations are not visible until they are exported back to the app/lang file, using <code>php artisan translation:export</code> command or publish button.</p>
+    <p><span style="color: #c11414">Warning</span> , translations are not visible until they are exported back to the app/lang file, using <code>php artisan translation:export</code> command or publish button.</p>
     <div class="alert alert-success success-import" style="display:none;">
         <p>Done importing, processed <strong class="counter">N</strong> items! Reload this page to refresh the groups!</p>
     </div>
@@ -222,14 +247,16 @@
                     <div class="form-group">
                         <input type="hidden" name="with-translations" value="1">
                         <input type="hidden" name="file" value="<?= $group ?>">
-                        <button type="submit" class="btn btn-default btn-block"  data-disable-with="Adding..">Auto translate missing translations</button>
+                        <button type="submit" class="btn btn-primary"  data-disable-with="Adding..">Auto translate missing translations</button>
                     </div>
                 </div>
             </div>
         </form>
         <hr>
     <h4>Total: <?= $numTranslations ?>, changed: <?= $numChanged ?></h4>
-        <table class="table">
+    <div class="table-responsive">
+        <table class="display table" id="basic-1">
+        {{-- <table class="table"> --}}
             <thead>
             <tr>
                 <th width="15%">Key</th>
@@ -326,6 +353,9 @@
 
 
 @push('scripts')
+
+	<script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
 
 
 @endpush

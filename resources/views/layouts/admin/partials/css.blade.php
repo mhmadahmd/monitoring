@@ -7,8 +7,13 @@
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/flag-icon.css')}}">
 <!-- Feather icon-->
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/feather-icon.css')}}">
+<!-- Toastr -->
+<link rel="stylesheet" href="{{ asset('assets/js/toastr/toastr.min.css')}}">
+
+<link rel="stylesheet" href="{{ asset('assets/js/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
+
 <!-- Plugins css start-->
-@stack('css')
+
 <!-- Plugins css Ends-->
 <!-- Bootstrap css-->
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/bootstrap.css')}}">
@@ -17,3 +22,4 @@
 <link id="color" rel="stylesheet" href="{{asset('assets/css/color-1.css')}}" media="screen">
 <!-- Responsive css-->
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/responsive.css')}}">
+@stack('css')
