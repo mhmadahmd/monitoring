@@ -32,15 +32,20 @@
                             <h6>General</h6>
                         </div>
                     </li>
+                
                     <li class="dropdown">
                         <a class="nav-link menu-title {{ prefixActive('/dashboard') }}" href="javascript:void(0)"><i data-feather="home"></i><span>Dashboard</span></a>                  
                         <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/dashboard') }};">
-                            <li><a href="{{route('users.index')}}" class="{{routeActive('users.index')}}">Manage user</a></li>
-                            <li><a href="{{ route('roles.index') }}" class="{{routeActive('roles.index')}}">Manage Role</a></li>
-                            <li><a href="{{ route('activeLog') }}" class="{{routeActive('activeLog')}}">Activity log</a></li>
-                            <li><a href="{{ url('translations') }}" class="{{url('translations')}}">translations</a></li>
+                            @can('user-list')    <li><a href="{{route('users.index')}}" class="{{routeActive('users.index')}}">{{ __('Manage user') }}</a></li>@endcan
+                            @can('role-list')  <li><a href="{{ route('roles.index') }}" class="{{routeActive('roles.index')}}">{{ __('Manage Role') }}</a></li>@endcan
+                            @can('category-list')  <li><a href="{{ route('category.index') }}" class="{{routeActive('category.index')}}">{{ __('Manage category') }}</a></li>@endcan
+                            @can('app-list')  <li><a href="{{ route('app.index') }}" class="{{routeActive('app.index')}}">{{ __('Manage Application') }}</a></li>@endcan
+                            <li><a href="{{ route('activeLog') }}" class="{{routeActive('activeLog')}}">{{ __('Activity log') }}</a></li>
+                            <li><a href="{{ url('translations') }}" class="{{url('translations')}}">{{ __('translations') }}</a></li>
                         </ul>
                     </li>
+                
+                 
                     <li class="dropdown">
                         <a class="nav-link menu-title {{ prefixActive('/widgets') }}" href="javascript:void(0)"><i data-feather="airplay"></i><span>Widgets</span></a>
                         <ul class="nav-submenu menu-content"  style="display: {{ prefixBlock('/widgets') }};">

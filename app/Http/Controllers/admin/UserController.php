@@ -69,11 +69,10 @@ class UserController extends Controller
 
         return [
             'status' => 0,
-            'message' => __('Successfully updated activite user'),
-            'reload' => true
+            'message' => __('Successfully created new user'),
+            'redirect' =>route('users.index'),
         ];
 
-        return redirect()->route('users.index');
     }
 
     public function activeLog()
@@ -144,9 +143,14 @@ class UserController extends Controller
 
     $user->assignRole($request->input('role'));
   
-
-    return redirect()->route('users.index')
-                    ->with('success','User updated successfully');
+    return [
+        'status' => 0,
+        'message' => __('User updated successfully'),
+        'redirect' =>route('users.index'),
+     
+    ];
+    // return redirect()->route('users.index')
+    //                 ->with('success','User updated successfully');
 
 
     }
@@ -156,8 +160,14 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
-        return redirect()->route('users.index')
-                        ->with('success','User deleted successfully');
+
+        return [
+            'status' => 1,
+            'message' => __('User deleted successfully'),
+            'reload' => true,
+        ];
+        // return redirect()->route('users.index')
+        //                 ->with('success','User deleted successfully');
     }
 
 

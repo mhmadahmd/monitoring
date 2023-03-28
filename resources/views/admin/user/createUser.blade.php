@@ -18,6 +18,7 @@
         <li class="breadcrumb-item active">Validation Forms</li>
 	@endcomponent
 	 --}}
+	 @canany([ 'user-create', 'user-edit'])
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12">
@@ -160,7 +161,7 @@
 		</div>
 	</div>
 	
-	
+	@endcan
 	@push('scripts')
 	<script src="{{ asset('assets/js/form-validation-custom.js') }}"></script>
   

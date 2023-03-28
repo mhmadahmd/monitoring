@@ -58,5 +58,6 @@
     </div>
     <!-- latest jquery-->
     @includeIf('layouts.admin.partials.js')
+    @includeIf('layouts.admin.partials.transleteJS')
   </body>
 </html>

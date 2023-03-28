@@ -34,7 +34,7 @@
   <p>{{ $message }}</p>
 </div>
 @endif
-
+@can('user-list') 
 	<div class="container-fluid">
 	    <div class="row">
 	        <!-- Zero Configuration  Starts-->
@@ -42,10 +42,11 @@
 	            <div class="card">
 	                <div class="card-header">
 	                    <h5>{{ __('all user')}} </h5>
+						@can('user-create') 
 	                   	<a href="{{ route('users.create') }}" class="btn btn-pill btn-success-gradien " 
 						style="float: right"
 						type="button">{{ __('create user')}}</a>
-
+						@endcan
 					</div>
 	                <div class="card-body">
 	                    <div class="table-responsive">
@@ -87,15 +88,18 @@
 										  </td>
 	                                 
 										<td>
+											@can('user-edit') 
 											<a href="{{ route('users.edit',$user->id) }}" class="text-muted">
 											<i class="fa fa-edit"></i>
 											</a>
-											
-											{!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-										<button type="submit" style="border:none;">	<i class="fa fa-trash-o"></i></button>
-											
-												
-										{!! Form::close() !!}
+											@endcan
+
+											@can('user-delete') 
+											<a class="confirmDelete"
+											data-action="/dashboard/users/"
+											data-id="{{ $user->id }}"
+											   href="javascript:void(0);"><i class="fa fa-trash-o"></i></a>
+											   @endcan
 										  </td> 
 	                                </tr>
 									@endforeach
@@ -109,7 +113,7 @@
 
 	    </div>
 	</div>
-
+@endcan
 	
 	@push('scripts')
 	<script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>

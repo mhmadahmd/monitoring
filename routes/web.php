@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\RoleController;
 use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\ApplicationController;
 use App\Http\Controllers\LangController;
 
 
@@ -33,14 +35,18 @@ Route::prefix('dashboard','{locale}')->middleware('auth','setapplang')->group(fu
  
         Route::resource('roles', RoleController::class);
         Route::resource('users', UserController::class);
+        Route::resource('category', CategoryController::class);
+        Route::resource('app',ApplicationController::class);
         Route::resource('products', ProductController::class);
         Route::get('/changeStatus/{id}/{status}',  [UserController::class, 'changeStatus']);
         Route::get('/activeLog',  [UserController::class, 'activeLog'])->name('activeLog');
 
-    Route::get('/',  [App\Http\Controllers\admin\UserController::class, 'index'])->name('allUser');
-    Route::get('/editUser/{id}',  [App\Http\Controllers\admin\UserController::class, 'edit'])->name('editUser');
-    Route::post('/saveUser',  [App\Http\Controllers\admin\UserController::class, 'saveUser'])->name('saveUser');
-    Route::post('/updateUser/{id}',  [App\Http\Controllers\admin\UserController::class, 'update'])->name('updateUser');
+    Route::get('/',  [UserController::class, 'index'])->name('allUser');
+    Route::get('/editUser/{id}',  [UserController::class, 'edit'])->name('editUser');
+    Route::post('/saveUser',  [UserController::class, 'saveUser'])->name('saveUser');
+    Route::post('/updateUser/{id}',  [UserController::class, 'update'])->name('updateUser');
+    Route::post('/categoryUpdate/{id}',  [CategoryController::class, 'update'])->name('categoryUpdate');
+    Route::post('/appUpdate/{id}',  [ApplicationController::class, 'update'])->name('appUpdate');
     Route::view('default', 'admin.dashboard.default')->name('dashboard.index');
 });
 

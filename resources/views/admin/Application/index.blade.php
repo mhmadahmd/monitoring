@@ -1,0 +1,116 @@
+@extends('layouts.admin.master')
+
+@section('title'){{ __('All user')}}
+ {{ $title }}
+@endsection
+
+@push('css')
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
+<link rel="stylesheet" type="text/css" href="{{asset('assets/css/sweetalert2.css')}}">
+
+<style>
+	button, input[type="submit"], input[type="reset"] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+</style>
+
+@endpush
+
+@section('content')
+	{{-- @component('components.breadcrumb')
+		@slot('breadcrumb_title')
+			<h3>Basic DataTables</h3>
+		@endslot
+		<li class="breadcrumb-item">Tables</li>
+		<li class="breadcrumb-item">Data Tables</li>
+		<li class="breadcrumb-item active">Basic Init</li>
+	@endcomponent --}}
+
+	@can('app-list') 
+	<div class="container-fluid">
+	    <div class="row">
+	        <!-- Zero Configuration  Starts-->
+	        <div class="col-sm-12">
+	            <div class="card">
+	                <div class="card-header">
+	                    <h5>{{ __('all application')}} </h5>
+						@can('app-create') 
+	                   	<a href="{{ route('app.create') }}" class="btn btn-pill btn-success-gradien " 
+						style="float: right"
+						type="button">{{ __('create application')}}</a>
+						@endcan
+					</div>
+	                <div class="card-body">
+	                    <div class="table-responsive">
+	                        <table class="display" id="basic-1">
+	                            <thead>
+	                                <tr>
+	                                    <th>{{ __('Name')}}</th>
+										<th>{{ __('domain') }}</th>
+	                                    <th>{{ __('ip') }}</th>
+	                                    <th>{{ __('img') }}</th>
+	                                    <th>{{ __('note') }}</th>
+	                                    <th>{{ __('category') }}</th>
+	                                    <th>{{ __('status') }}</th>
+	                                    <th>{{ __('more') }}</th>
+	                                
+	                                </tr>
+	                            </thead>
+	                            <tbody>
+									@foreach ($allApplication as $application)
+									<tr>
+	                                    <td>{{  $application->name }}</td>
+	                                    <td>{{  $application->domain }}</td>
+	                                    <td>{{  $application->ip }}</td>
+	                                    <td><img src="{{ asset('img') }}/{{ $application->img }}"
+											width=" 150px" alt=""></td>
+	                                    <td>{{  $application->note }}</td>
+	                                    <td>{{  $application->categoryR->name }}</td>
+	                                    <td>@if($application->status == 1) {{ __('Active')}} @else {{ __('unActive')}} @endif</td>
+	                                
+									
+										<td>
+											@can('app-edit') 
+											<a href="{{ route('app.edit',$application->id) }}" class="text-muted">
+											<i class="fa fa-edit"></i>
+											</a>
+											@endcan
+
+											@can('app-delete') 
+											<a class="confirmDelete"
+											data-action="/dashboard/app/"
+											data-id="{{ $application->id }}"
+											   href="javascript:void(0);"><i class="fa fa-trash-o"></i></a>
+						  @endcan
+											{{-- {!! Form::open(['method' => 'DELETE','route' => ['app.destroy', $application->id],'style'=>'display:inline']) !!}
+										<button type="submit" style="border:none;">	<i class="fa fa-trash-o"></i></button>
+										{!! Form::close() !!} --}}
+										  </td> 
+	                                </tr>
+									@endforeach
+	                             
+	                            </tbody>
+	                        </table>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+
+	    </div>
+	</div>
+
+@endcan
+			 		
+	@push('scripts')
+	<script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
+	<script src="{{asset('assets/js/sweet-alert/sweetalert.min.js')}}"></script>
+	@endpush
+
+@endsection

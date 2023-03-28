@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('phone_number')->nullable();
             $table->longText('address')->nullable();
             $table->integer('role');
+            $table->boolean('account_status')->nullable();
+
 
         });
     }
