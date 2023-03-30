@@ -11,12 +11,12 @@
 |
 */
 
-// Route::prefix('user')->group(function() {
+Route::prefix('user')->group(function() {
     // Route::get('/', 'UserController@index');
     Route::resource('users','UserController');
 
     Route::get('/',  'UserController@index')->name('allUser');
     Route::get('/editUser/{id}',  'UserController@edit')->name('editUser');
-    Route::post('/saveUser',  'UserController@store')->name('saveUser');
+    Route::post('/saveUser',  'UserController@saveUser')->name('saveUser');
     Route::post('/updateUser/{id}', 'UserController@update')->name('updateUser');
-// });
+});

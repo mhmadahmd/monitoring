@@ -30,6 +30,11 @@ Route::get('/', function () {
 Route::view('sample-page', 'admin.pages.sample-page')->name('sample-page');
 
 Route::prefix('dashboard','{locale}')->middleware('auth','setapplang')->group(function(){
+
+    Route::get('/', function () {
+        return redirect()->route('allUser');
+    })->name('/');
+
     Route::get('lang/home', [LangController::class, 'index']);
     Route::get('changeLang/{lang}', [LangController::class, 'change'])->name('changeLang');
  
@@ -41,7 +46,7 @@ Route::prefix('dashboard','{locale}')->middleware('auth','setapplang')->group(fu
         Route::get('/changeStatus/{id}/{status}',  [UserController::class, 'changeStatus']);
         Route::get('/activeLog',  [UserController::class, 'activeLog'])->name('activeLog');
 
-    Route::get('/',  [UserController::class, 'index'])->name('allUser');
+    // Route::get('/',  [UserController::class, 'index'])->name('allUser');
     // Route::get('/editUser/{id}',  [UserController::class, 'edit'])->name('editUser');
     // Route::post('/saveUser',  [UserController::class, 'saveUser'])->name('saveUser');
     // Route::post('/updateUser/{id}',  [UserController::class, 'update'])->name('updateUser');
