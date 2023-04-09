@@ -1,5 +1,7 @@
 {
     "Application": true,
     "User": true,
-    "Test": true
+    "Test": true,
+    "Monitor": true,
+    "Check": true
 }

@@ -39,14 +39,15 @@ Route::prefix('dashboard','{locale}')->middleware('auth','setapplang')->group(fu
     Route::get('changeLang/{lang}', [LangController::class, 'change'])->name('changeLang');
  
         Route::resource('roles', RoleController::class);
-        // Route::resource('users', UserController::class);
+        Route::resource('users', UserController::class);
         Route::resource('category', CategoryController::class);
         Route::resource('app',ApplicationController::class);
-        Route::resource('products', ProductController::class);
+        // Route::resource('products', ProductController::class);
         Route::get('/changeStatus/{id}/{status}',  [UserController::class, 'changeStatus']);
         Route::get('/activeLog',  [UserController::class, 'activeLog'])->name('activeLog');
 
-    // Route::get('/',  [UserController::class, 'index'])->name('allUser');
+    Route::get('/',  [UserController::class, 'index'])->name('allUser');
+    Route::get('/getCheck',  [UserController::class, 'getCheck'])->name('getCheck');
     // Route::get('/editUser/{id}',  [UserController::class, 'edit'])->name('editUser');
     // Route::post('/saveUser',  [UserController::class, 'saveUser'])->name('saveUser');
     // Route::post('/updateUser/{id}',  [UserController::class, 'update'])->name('updateUser');

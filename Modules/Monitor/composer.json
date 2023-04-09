@@ -1,0 +1,26 @@
+{
+    "name": "nwidart/monitor",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Monitor\\": ""
+        }
+    },
+    "require": {
+        "spatie/laravel-server-monitor": "^1.9"
+    }
+}

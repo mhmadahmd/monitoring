@@ -39,6 +39,8 @@
     border-color: #ccc;
     margin-left: 20px;
 }
+.table-responsive {
+    overflow-x: inherit;}
 </style>
 <script>
     jQuery(document).ready(function($){
