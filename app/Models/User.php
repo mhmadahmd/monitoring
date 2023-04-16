@@ -10,10 +10,11 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
+use Shetabit\Visitor\Traits\Visitor;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles,LogsActivity;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles,LogsActivity,Visitor;
 
 
     /**

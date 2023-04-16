@@ -21,6 +21,8 @@ Route::middleware('auth:sanctum')->get('/monitor', function (Request $request) {
 }); 
 
 Route::prefix('monitor')->group(function() {
-    Route::get('/getCheck/{id}', 'MonitorController@getCheck');
+    Route::get('/getCheck/{id}', 'MintenanceController@getCheck');
+    Route::get('/UserOnline', 'MintenanceController@countUserOnline');
+    Route::get('/CheckRun', 'MintenanceController@CheckRun');
 });
 

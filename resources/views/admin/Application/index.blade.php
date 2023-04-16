@@ -20,6 +20,11 @@
 	cursor: pointer;
 	outline: inherit;
 }
+a{   
+	 cursor: pointer;
+	display: block;
+
+}
 </style>
 
 @endpush
@@ -82,11 +87,27 @@
 									@endphp
 									@if($op)
 									<td>
-										<a data-id="{{ $op->id }}" class="getCheck btn btn-pill btn-air-info btn-info-gradien"
+										<a data-id="{{ $op->id }}" class="getCheck "
+											data-url="{{ URL::to('api/monitor/getCheck')  }}"
 											data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg">
 											{{ __('statistics')}} 
+											<i class="fa fa-bar-chart-o"></i> 
 											</a>
-										
+											<a  class="getCheck "alt="Girl in a jacket"
+												data-url="{{ URL::to('api/monitor/UserOnline')  }}"
+												data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg">
+												{{ __('UsersOnline')}} 
+												<i class="fa fa-group"  ></i> 
+
+												</a>
+
+												<a  class="getCheck "
+												data-url="{{ URL::to('api/monitor/CheckRun')  }}"
+												data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg">
+												{{ __('CheckWebSite')}} 
+												<i class="fa fa-ban"></i>
+
+												</a>
 
 									</td>
 									@else
@@ -155,39 +176,20 @@
 	
 $(document).on('click', '.getCheck', function (ev) {
             var id =  $(this).data('id');
-            var url = "{{ URL::to('api/monitor/getCheck') }}/" + id;
-       
+            var action =  $(this).data('url');
+			var url;
+			$('.modal-body').empty();
+			if (id != undefined) {
+				 url = action + "/" + id;	
+			}else{  url = action ;}
 
             $.ajax({
                 url: url,
                 type: "get",
                 contentType: 'application/json',
                 success: function (data) {
-					$('.modal-body').append(`	<div class="container-fluid">
-									<div class="row">
-										
-									
-								
-										<div class="col-xl-6 box-col-6">
-											<div class="card">
-												<div class="card-header pb-0">
-													<h5>Pie Chart 1</h5>
-												</div>
-												<div class="card-body peity-charts"><span class="pie" data-peity='{ "fill": ["#24695c", "#ba895d"]}'>30,80</span></div>
-											</div>
-										</div>
-										<div class="col-xl-6 box-col-6">
-											<div class="card">
-												<div class="card-header pb-0">
-													<h5>Pie Chart 2</h5>
-												</div>
-												<div class="card-body peity-charts"><span class="pie" data-peity='{ "fill": ["#24695c", "#ba895d"]}'>1,2,3,2,2</span></div>
-											</div>
-										</div>
-										
-									
-									</div>
-								</div>`)
+					$('.modal-body').append(data);
+				
 								$("span.pie").peity("pie")
        console.log(data);
                 },

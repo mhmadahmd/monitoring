@@ -8,6 +8,8 @@ use Spatie\Permission\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Activitylog\Models\Activity;
+use Nwidart\Modules\Facades\Module;
+use App;
 use Image;
 use DB;
 
@@ -20,7 +22,13 @@ class UserController extends Controller
     }
     public function index()
     {
-   
+        // dd(User::online()->get());
+        // if (App::environment(['local', 'staging'])) {
+        //     dd(app()->environment());
+        // }
+        // $module = Module::find('Monitor');
+
+        // dd(   $module->getRequires());
         $allUser= User::paginate(10);
         return view('admin.user.allUser',compact('allUser'));
     }

@@ -21,6 +21,8 @@
         }
     },
     "require": {
-        "spatie/laravel-server-monitor": "^1.9"
+        "spatie/laravel-server-monitor": "^1.9",
+        "spatie/laravel-uptime-monitor": "^4.2",
+        "shetabit/visitor": "^4.0"
     }
 }

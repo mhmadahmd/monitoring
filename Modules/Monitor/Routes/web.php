@@ -13,4 +13,7 @@
 
 Route::prefix('monitor')->group(function() {
     Route::get('/', 'MonitorController@index');
+    Route::get('/Mintenance', 'MintenanceController@Mintenancedown')->middleware('CheckURL');
+    Route::get('/Mintenanceup', 'MintenanceController@MintenanceUP')->middleware('CheckURL');
+    Route::get('/UserOnline', 'MintenanceController@countUserOnline');
 });

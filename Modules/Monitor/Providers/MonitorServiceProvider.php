@@ -25,14 +25,23 @@ class MonitorServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerTranslations();
+
+        
+        $router = $this->app['router'];
+
+        $router->middleware('visitors', '\Shetabit\Visitor\Middlewares\LogVisits::class');
+
+        $this->registerTranslations();  
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+        app()->make('router')->aliasMiddleware('CheckURL','Modules\Monitor\Http\Middleware\CheckURLMiddleware::class');
+        app()->make('router')->aliasMiddleware('visitors','\Shetabit\Visitor\Middlewares\LogVisits::class');
         $this->app->booted(function () {
             $schedule = $this->app->make(Schedule::class);
             $schedule->command('server-monitor:run-checks')
             ->everyMinute();
+            $schedule->command('monitor:check-uptime')->everyMinute();
         });
     }
 
